@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { useLang } from '@/lib/i18n';
 import { GAMES } from '@/lib/games';
 import Items from '@/components/Items';
-import Visits from '@/components/Visits';
+import Stats from '@/components/Stats';
+import HeroArt from '@/components/HeroArt';
 import Cover from '@/components/Cover';
 
 export default function Home() {
@@ -11,12 +12,13 @@ export default function Home() {
   return (
     <>
       <div className="hero">
+        <HeroArt />
         <h1>{t('heroTitle')}</h1>
         <p>{t('heroText')}</p>
         <Link className="btn" href="/games">{t('playNow')}</Link>{' '}
         <Link className="btn" href="/chat">{t('askBot')}</Link>
       </div>
-      <div className="stat"><Visits /></div>
+      <Stats />
 
       <div className="sec"><h2>{t('featPosts')}</h2><Link className="btn alt" href="/posts">{t('more')}</Link></div>
       <Items type="posts" limit={4} />

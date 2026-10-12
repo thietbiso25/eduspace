@@ -34,3 +34,5 @@ grant execute on function increment_visits() to anon, authenticated;
 -- SAU KHI tạo tài khoản admin (Authentication > Users > Add user), chạy dòng này
 -- (thay email của bạn):
 -- insert into admins (user_id) select id from auth.users where email = 'email-cua-ban@gmail.com';
+
+-- (Cài mới) chạy thêm file migration-2.sql để có ảnh bìa và kho ảnh

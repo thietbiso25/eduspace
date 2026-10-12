@@ -1,8 +1,11 @@
 'use client';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { useLang } from '@/lib/i18n';
-import Cover from './Cover';
+import { excerpt } from '@/lib/sanitize';
+import VideoThumb from './VideoThumb';
+import PostThumb from './PostThumb';
 
 export default function Items({ type, limit }) {
   const { t } = useLang();
@@ -21,15 +24,15 @@ export default function Items({ type, limit }) {
     <div className="grid">
       {rows.map((r) =>
         type === 'posts' ? (
-          <div className="card" key={r.id}>
-            <Cover title={r.title} emoji={r.emoji} tag={t('posts')} />
+          <Link href={`/posts/${r.id}`} className="card hv" key={r.id}>
+            <PostThumb post={r} tag={t('posts')} />
             <div className="meta">{new Date(r.created_at).toLocaleDateString()}</div>
             <h3>{r.title}</h3>
-            <p>{limit && r.content.length > 110 ? r.content.slice(0, 110) + '…' : r.content}</p>
-          </div>
+            <p>{excerpt(r.content, 120)}</p>
+          </Link>
         ) : (
           <div className="card" key={r.id}>
-            <Cover title={r.title} emoji={r.emoji} tag="Video" play />
+            <VideoThumb title={r.title} emoji={r.emoji} url={r.url} />
             <b>{r.title}</b><br />
             {/^https?:\/\//.test(r.url) && (
               <a href={r.url} target="_blank" rel="noopener noreferrer">{t('openVideo')}</a>

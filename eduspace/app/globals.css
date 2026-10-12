@@ -75,3 +75,14 @@ footer .logo{font-size:1.7rem}
 .lgb{border:2px solid var(--bd);background:var(--card);color:var(--pr);border-radius:999px;padding:5px 14px;cursor:pointer;font:inherit}
 .lgb.on{background:var(--pr);color:#fff;border-color:var(--pr)}
 .cp{max-width:1000px;margin:18px auto 0;padding-top:14px;border-top:1px dashed var(--bd);text-align:center;font-size:.9rem}
+.pcover{display:block;width:100%;max-height:340px;object-fit:cover;border-radius:20px;margin:12px 0}
+.rich img{max-width:100%;height:auto;border-radius:12px;margin:8px 0}
+.rich h2,.rich h3{margin:16px 0 6px}.rich p,.rich div{margin:6px 0}.rich ul,.rich ol{padding-left:24px}
+.rich blockquote{border-left:4px solid var(--pr);margin:8px 0;padding:4px 12px;color:var(--mu)}
+.tb{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;align-items:center}
+.tb button{border:2px solid var(--bd);background:var(--card);color:var(--tx);border-radius:10px;padding:4px 10px;font:inherit;cursor:pointer}
+.tb button:hover{border-color:var(--pr);color:var(--pr)}
+.tb .sep{width:1px;height:24px;background:var(--bd)}
+.ed{min-height:240px;border:2px solid var(--bd);border-radius:14px;padding:12px;background:var(--bg);outline:none;margin-bottom:8px}
+.ed:focus{border-color:var(--pr)}
+label.btn{cursor:pointer}

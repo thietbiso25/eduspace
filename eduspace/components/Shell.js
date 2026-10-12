@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLang } from '@/lib/i18n';
 
-const YT = process.env.NEXT_PUBLIC_YOUTUBE_URL || 'https://www.youtube.com';
-const TT = process.env.NEXT_PUBLIC_TIKTOK_URL || 'https://www.tiktok.com';
+const YT = process.env.NEXT_PUBLIC_YOUTUBE_URL || 'https://youtube.com/@giaoducvasangtao';
+const TT = process.env.NEXT_PUBLIC_TIKTOK_URL || 'https://www.tiktok.com/@hong..nhunn';
 const NAV = [['/', 'home'], ['/posts', 'posts'], ['/videos', 'videos'], ['/games', 'games'], ['/chat', 'chat']];
 
 function Logo() {

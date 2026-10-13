@@ -28,7 +28,7 @@ const T = {
     adminTitle: 'Quản trị', email: 'Email', password: 'Mật khẩu', login: 'Đăng nhập', logout: 'Đăng xuất',
     titleLbl: 'Tiêu đề', contentLbl: 'Nội dung', emojiLbl: 'Emoji ảnh bìa (tùy chọn)', urlLbl: 'Liên kết video',
     publish: 'Đăng bài', addVideo: 'Thêm video', del: 'Xóa',
-    save: 'Lưu thay đổi', cancel: 'Hủy sửa', edit: 'Sửa', view: 'Xem', saved: 'Đã lưu!', coverLbl: 'Ảnh bìa', uploadCover: '📷 Tải ảnh bìa', removeCover: 'Gỡ ảnh bìa', confirmDel: 'Bạn chắc chắn muốn xóa mục này?', backList: '← Quay lại', notFound: 'Không tìm thấy bài viết.', editing: 'Đang sửa bài viết',
+    save: 'Lưu thay đổi', cancel: 'Hủy sửa', edit: 'Sửa', view: 'Xem', noGames: 'Chưa có trò chơi.', openGame: 'Mở trò chơi ↗', saved: 'Đã lưu!', coverLbl: 'Ảnh bìa', uploadCover: '📷 Tải ảnh bìa', removeCover: 'Gỡ ảnh bìa', confirmDel: 'Bạn chắc chắn muốn xóa mục này?', backList: '← Quay lại', notFound: 'Không tìm thấy bài viết.', editing: 'Đang sửa bài viết',
   },
   en: {
     home: 'Home', posts: 'Articles', videos: 'Videos', games: 'Games', chat: 'Chatbot',
@@ -56,7 +56,7 @@ const T = {
     adminTitle: 'Admin', email: 'Email', password: 'Password', login: 'Log in', logout: 'Log out',
     titleLbl: 'Title', contentLbl: 'Content', emojiLbl: 'Cover emoji (optional)', urlLbl: 'Video link',
     publish: 'Publish', addVideo: 'Add video', del: 'Delete',
-    save: 'Save changes', cancel: 'Cancel edit', edit: 'Edit', view: 'View', saved: 'Saved!', coverLbl: 'Cover image', uploadCover: '📷 Upload cover', removeCover: 'Remove cover', confirmDel: 'Are you sure you want to delete this?', backList: '← Back', notFound: 'Article not found.', editing: 'Editing article',
+    save: 'Save changes', cancel: 'Cancel edit', edit: 'Edit', view: 'View', noGames: 'No games yet.', openGame: 'Open game ↗', saved: 'Saved!', coverLbl: 'Cover image', uploadCover: '📷 Upload cover', removeCover: 'Remove cover', confirmDel: 'Are you sure you want to delete this?', backList: '← Back', notFound: 'Article not found.', editing: 'Editing article',
   },
 };
 

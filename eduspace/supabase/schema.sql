@@ -36,3 +36,5 @@ grant execute on function increment_visits() to anon, authenticated;
 -- insert into admins (user_id) select id from auth.users where email = 'email-cua-ban@gmail.com';
 
 -- (Cài mới) chạy thêm file migration-2.sql để có ảnh bìa và kho ảnh
+
+-- (Cài mới) chạy thêm migration-2.sql và migration-3-games.sql

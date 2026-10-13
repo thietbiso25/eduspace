@@ -1,63 +1,63 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { GAMES } from '@/lib/games';
 import { useLang } from '@/lib/i18n';
-import Cover from '@/components/Cover';
+import { useGames } from '@/lib/useGames';
+import { GameGrid } from '@/components/GameCards';
 
 export default function Games() {
   const { t } = useLang();
-  const [g, setG] = useState(null);
+  const games = useGames();
+  const [gid, setGid] = useState(null);
   const [qi, setQi] = useState(0);
   const [sc, setSc] = useState(0);
   const [pick, setPick] = useState(null);
 
-  const start = (i) => { setG(i); setQi(0); setSc(0); setPick(null); };
-  useEffect(() => {
-    const i = parseInt(location.hash.slice(1), 10);
-    if (GAMES[i]) start(i);
-  }, []);
+  const start = (id) => { setGid(id); setQi(0); setSc(0); setPick(null); };
 
-  const G = g == null ? null : GAMES[g];
+  // Mở thẳng trò chơi khi vào từ liên kết dạng /games#mã-trò-chơi
+  useEffect(() => {
+    if (!games) return;
+    const id = decodeURIComponent(location.hash.slice(1));
+    if (id && games.some((g) => g.id === id && g.kind !== 'link')) start(id);
+  }, [games]);
+
+  if (!games) return <p className="meta">…</p>;
+  const G = games.find((g) => g.id === gid);
+  const qs = (G && G.questions) || [];
+
   const choose = (i) => {
     if (pick !== null) return;
     setPick(i);
-    if (i === G.q[qi].a) setSc((s) => s + 1);
+    if (i === qs[qi].a) setSc((s) => s + 1);
     setTimeout(() => { setQi((q) => q + 1); setPick(null); }, 900);
   };
 
-  if (!G) {
+  if (!G || !qs.length) {
     return (
       <>
         <h2>{t('featGames')}</h2>
         <p className="sub">{t('chooseGame')}</p>
-        <div className="grid">
-          {GAMES.map((x, i) => (
-            <div key={x.n} className="card hv" onClick={() => start(i)}>
-              <Cover title={x.n} emoji={x.e} tag={t('games')} />
-              <b>{x.n}</b><br /><span className="meta">{x.d}</span>
-            </div>
-          ))}
-        </div>
+        <GameGrid games={games} onPick={start} />
       </>
     );
   }
 
-  if (qi >= G.q.length) {
+  if (qi >= qs.length) {
     return (
       <div className="card" style={{ textAlign: 'center' }}>
-        <div className="num">🏆 {sc}/{G.q.length}</div>
-        <button className="btn" onClick={() => start(g)}>{t('again')}</button>{' '}
-        <button className="btn alt" onClick={() => setG(null)}>{t('back')}</button>
+        <div className="num">🏆 {sc}/{qs.length}</div>
+        <button className="btn" onClick={() => start(gid)}>{t('again')}</button>{' '}
+        <button className="btn alt" onClick={() => setGid(null)}>{t('back')}</button>
       </div>
     );
   }
 
-  const q = G.q[qi];
+  const q = qs[qi];
   return (
     <div className="card">
-      <button className="lnk" onClick={() => setG(null)}>{t('back')}</button>
-      <div className="prog"><i style={{ width: `${(qi / G.q.length) * 100}%` }} /></div>
-      <div className="meta">{t('question')} {qi + 1}/{G.q.length} · {t('score')}: {sc}</div>
+      <button className="lnk" onClick={() => setGid(null)}>{t('back')}</button>
+      <div className="prog"><i style={{ width: `${(qi / qs.length) * 100}%` }} /></div>
+      <div className="meta">{t('question')} {qi + 1}/{qs.length} · {t('score')}: {sc}</div>
       <h3>{q.q}</h3>
       {q.o.map((o, i) => (
         <button

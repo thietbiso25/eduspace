@@ -91,3 +91,6 @@ label.btn{cursor:pointer}
 .chip{border:2px solid var(--bd);background:var(--card);color:var(--pr);border-radius:999px;padding:4px 14px;font:inherit;cursor:pointer}
 .chip:hover{border-color:var(--pr)}
 .m a{word-break:break-all}
+
+.qbox{border:2px dashed var(--bd);border-radius:18px;padding:10px;margin-bottom:10px}
+.row .lgb{font-size:1rem}

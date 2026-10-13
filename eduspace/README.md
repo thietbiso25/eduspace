@@ -30,3 +30,6 @@ Trang quản trị: `/admin` (không có nút trên menu, chỉ bạn biết đ�
 - Giới hạn chatbot (`CHAT_DAILY_LIMIT`) chỉ là lớp chặn cơ bản; theo dõi mức dùng trong trang quản lý của nhà cung cấp AI.
 - Thay link YouTube/TikTok bằng kênh thật qua `NEXT_PUBLIC_YOUTUBE_URL` / `NEXT_PUBLIC_TIKTOK_URL`.
 - Đọc lại nội dung trang Về chúng tôi và Điều khoản trong `lib/i18n.js` trước khi công khai.
+
+## Quản lý trò chơi (bản cập nhật 6)
+Chạy `supabase/migration-3-games.sql` trong Supabase (tab SQL). Sau đó vào `/admin` > mục "Trò chơi" để thêm, sửa, xóa, đổi thứ tự trò chơi.

@@ -113,7 +113,7 @@ export async function POST(req) {
   }));
   while (contents.length && contents[0].role !== 'user') contents.shift();
 
-  const models = [...new Set([process.env.GEMINI_MODEL, 'gemini-2.5-flash-lite', 'gemini-2.5-flash'].filter(Boolean))];
+  const models = [...new Set([process.env.GEMINI_MODEL, 'gemini-3.5-flash-lite', 'gemini-3.8-flash'].filter(Boolean))];
   let text = '', status = 0;
   for (const m of models) {
     const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent`, {

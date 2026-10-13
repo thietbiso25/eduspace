@@ -15,7 +15,7 @@ export async function POST(req) {
 
   const key = process.env.GEMINI_API_KEY || '';
   const out = { hasKey: !!key, keyStart: key.slice(0, 3), keyLength: key.length, envModel: process.env.GEMINI_MODEL || '', models: [] };
-  const models = [...new Set([process.env.GEMINI_MODEL, 'gemini-2.5-flash-lite', 'gemini-2.5-flash'].filter(Boolean))];
+  const models = [...new Set([process.env.GEMINI_MODEL, 'gemini-3.5-flash-lite', 'gemini-3.8-flash'].filter(Boolean))];
 
   for (const m of models) {
     try {

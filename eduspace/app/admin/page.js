@@ -5,6 +5,8 @@ import { supabase } from '@/lib/supabase';
 import { useLang } from '@/lib/i18n';
 import { uploadImage } from '@/lib/upload';
 import RichEditor from '@/components/RichEditor';
+import GameAdmin from '@/components/GameAdmin';
+import ChatCheck from '@/components/ChatCheck';
 
 const EMPTY = { title: '', content: '', emoji: '', cover_url: '' };
 const hasContent = (s) => /<img/i.test(s) || s.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').trim() !== '';
@@ -154,6 +156,9 @@ export default function Admin() {
           </div>
         ))}
       </div>
+
+      <GameAdmin onMsg={setMsg} />
+      <ChatCheck />
     </>
   );
 }

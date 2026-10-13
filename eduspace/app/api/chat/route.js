@@ -2,12 +2,14 @@ import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { GAMES } from '@/lib/games';
 
+export const maxDuration = 30;
+
 // ---- Giới hạn lượt hỏi (bộ đếm trong bộ nhớ: chỉ là lớp chặn cơ bản) ----
 const hits = new Map();
 let globalCount = { day: '', n: 0 };
 
 // ---- Bộ nhớ tạm nội dung website (làm mới mỗi 60 giây) ----
-let cache = { t: 0, posts: [], videos: [] };
+let cache = { t: 0, posts: [], videos: [], games: [] };
 
 const STOP = new Set(['cho', 'cua', 'nhung', 'nhu', 'nao', 'khong', 'duoc', 'trong', 'mot', 'cac', 'nay', 'bai', 'viet', 'the', 'and', 'what', 'who', 'how', 'the', 'are', 'for', 'about']);
 
@@ -26,11 +28,12 @@ async function loadSite() {
   if (cache.t && Date.now() - cache.t < 60000) return cache;
   try {
     const sb = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
-    const [p, v] = await Promise.all([
+    const [p, v, g] = await Promise.all([
       sb.from('posts').select('id,title,content,created_at').order('created_at', { ascending: false }).limit(60),
       sb.from('videos').select('id,title,url,created_at').order('created_at', { ascending: false }).limit(40),
+      sb.from('games').select('title,description,kind,url,questions').order('position'),
     ]);
-    cache = { t: Date.now(), posts: (p.data || []).map((x) => ({ ...x, text: strip(x.content) })), videos: v.data || [] };
+    cache = { t: Date.now(), posts: (p.data || []).map((x) => ({ ...x, text: strip(x.content) })), videos: v.data || [], games: g.error ? GAMES.map((x) => ({ title: x.n, description: x.d, kind: 'quiz', questions: x.q })) : g.data || [] };
   } catch (e) {
     console.error('loadSite error', e);
   }
@@ -58,7 +61,7 @@ function buildData(origin, site, question) {
   parts.push(`Website: EduSpace (${origin}). Khẩu hiệu: Học mà chơi, chơi mà học. Miễn phí, không cần đăng ký. Nội dung bài viết và video do quản trị viên đăng và chọn lọc.`);
   parts.push(`Các trang: ${origin}/posts (Bài viết), ${origin}/videos (Video), ${origin}/games (Trò chơi), ${origin}/chat (Chatbot), ${origin}/about (Về chúng tôi), ${origin}/terms (Điều khoản và Đạo đức số).`);
   parts.push(`Kênh mạng xã hội: YouTube ${yt} ; TikTok ${tt}`);
-  parts.push('Trò chơi hiện có:\n' + GAMES.map((g) => `- ${g.n}: ${g.d} (${g.q.length} câu)`).join('\n'));
+  parts.push('Trò chơi hiện có (' + origin + '/games):\n' + (site.games.map((g) => `- ${g.title}: ${g.description || ''}${g.kind === 'link' ? ` (trò chơi bên ngoài: ${g.url})` : g.questions ? ` (${g.questions.length} câu)` : ''}`).join('\n') || '(chưa có trò chơi)'));
   parts.push(`Tổng số bài viết: ${site.posts.length}. Tất cả tiêu đề bài viết:\n` + (site.posts.map((p) => `- ${p.title}`).join('\n') || '(chưa có bài viết)'));
   parts.push('Nội dung các bài viết liên quan:\n' + (chosen.map((p) => `### ${p.title}\nĐường dẫn: ${origin}/posts/${p.id}\nNgày đăng: ${String(p.created_at).slice(0, 10)}\n${p.text.slice(0, 1800)}`).join('\n\n') || '(chưa có)'));
   parts.push(`Tổng số video: ${site.videos.length}. Danh sách video:\n` + (site.videos.map((v) => `- ${v.title}: ${v.url}`).join('\n') || '(chưa có video)'));

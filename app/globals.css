@@ -122,3 +122,13 @@ nav .nbtn:hover{background:var(--bg)}
 .cw-chip:hover{border-color:var(--pr)}
 .cw-row{display:flex;gap:8px;padding:10px 12px 12px;border-top:2px solid var(--bd);background:var(--card)}
 .cw-row input{margin:0;flex:1;border-radius:999px}
+
+/* HIỆU ỨNG MENU: nổi lên, đổi màu và đổ bóng khi rê chuột */
+nav a,nav .nbtn{transition:transform .2s ease,background .2s ease,color .2s ease,box-shadow .2s ease}
+@media (hover:hover){
+  nav a:hover,nav .nbtn:hover{color:var(--pr);background:#ffe3e1;transform:translateY(-3px) scale(1.06);box-shadow:0 8px 16px rgba(255,90,95,.28)}
+  nav a.on:hover{background:#ffd5d2;box-shadow:inset 0 0 0 2px #ffc9c6,0 8px 16px rgba(255,90,95,.28)}
+}
+nav a:active,nav .nbtn:active{transform:translateY(0) scale(.97)}
+nav a:focus-visible,nav .nbtn:focus-visible{outline:3px solid #ffc9c6;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){nav a,nav .nbtn{transition:none}nav a:hover,nav .nbtn:hover{transform:none}}

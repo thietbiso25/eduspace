@@ -32,7 +32,7 @@ export default function Items({ type, limit }) {
           </Link>
         ) : (
           /^https?:\/\//.test(r.url) ? (
-            <a className="card hv" key={r.id} href={r.url} target="_blank" rel="noopener noreferrer">
+            <a className="card hv vid" key={r.id} href={r.url} target="_blank" rel="noopener noreferrer">
               <VideoThumb title={r.title} emoji={r.emoji} url={r.url} />
               <b>{r.title}</b><br />
               <span className="vlink">{t('openVideo')}</span>

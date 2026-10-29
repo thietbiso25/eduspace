@@ -145,3 +145,22 @@ nav a:focus-visible,nav .nbtn:focus-visible{outline:3px solid #ffc9c6;outline-of
   nav a,nav .nbtn,.card.hv,.card.hv .thumb img,.card.hv .thumb .em,.card.hv .thumb .pl,.card.hv .vlink{transition:none}
   nav a:hover,nav .nbtn:hover,.card.hv:hover,.card.hv:hover .thumb img,.card.hv:hover .thumb .em,.card.hv:hover .thumb .pl,.card.hv:hover .vlink{transform:none}
 }
+
+/* Thẻ video: phóng to nhẹ cả thẻ, ảnh bìa phóng thêm một chút bên trong khung */
+.card.vid{transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease}
+.card.vid:hover{transform:scale(1.035);box-shadow:0 12px 26px rgba(255,90,95,.26)}
+.card.vid .thumb img{transition:transform .5s ease}
+.card.vid:hover .thumb img{transform:scale(1.08)}
+.card.vid:hover .thumb .pl{transform:scale(1.15)}
+@media (prefers-reduced-motion:reduce){.card.vid,.card.vid .thumb img{transition:none}.card.vid:hover,.card.vid:hover .thumb img,.card.vid:hover .thumb .pl{transform:none}}
+
+/* MÀU KHI RÊ CHUỘT CHO NÚT BO GÓC: chuyển sang coral đậm, chữ trắng */
+.btn,.lgb,.cw-chip{transition:transform .2s ease,background-color .2s ease,color .2s ease,border-color .2s ease,box-shadow .2s ease,filter .2s ease}
+nav a:hover,nav .nbtn:hover,nav a.on:hover{background-color:var(--pr);color:#fff;transform:translateY(-3px);box-shadow:0 8px 16px rgba(255,90,95,.4)}
+nav a.on:hover{box-shadow:inset 0 0 0 2px #ffb3ae,0 8px 16px rgba(255,90,95,.4)}
+.btn.alt:hover,.lgb:hover,.cw-chip:hover{background-color:var(--pr);border-color:var(--pr);color:#fff;transform:translateY(-2px);box-shadow:0 6px 14px rgba(255,90,95,.35)}
+.btn:not(.alt):hover{transform:translateY(-2px);filter:brightness(1.08);box-shadow:0 6px 14px rgba(255,90,95,.35)}
+.hero .btn:hover{background-color:#fff3c4;color:var(--pr);filter:none;box-shadow:0 6px 14px rgba(0,0,0,.18)}
+.lgb.on:hover{filter:brightness(1.08)}
+a:focus:not(:focus-visible),button:focus:not(:focus-visible){outline:none}
+@media (prefers-reduced-motion:reduce){.btn,.lgb,.cw-chip{transition:none}nav a:hover,nav .nbtn:hover,.btn:hover,.lgb:hover,.cw-chip:hover{transform:none}}
